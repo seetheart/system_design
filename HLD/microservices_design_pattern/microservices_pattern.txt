@@ -1,0 +1,48 @@
+- We have two types of architectures 1) monolithic 2) microlithic
+- why monolithic is not preferred?
+ans: The code becomes huge. All the system goes down all at once.
+     Too much loan on the server. System becomes slow if parallely some
+     background job is running.
+     1) overload IDE. won't loan on IDE.
+     2) scaling is very hard. CI(continuous integration) is slow. Even for one line change
+        all code will have to run CI. All the test cases will run again. deployment will
+        take a lot of time.
+     3) tightly coupled application.
+     4) If we want to scale only one component then it is not possible. whole application
+        will have to be deployed again.
+
+- All the disadvantages of monolithic are advantages of microservice.
+
+- Disadvantages of microservices?
+ans:
+   1) There has to be proper definition of components.
+   2) All the services should be loosely coupled. one microservice should not make a lot of request
+      to other microservice. Latency can increase.
+   3) The consumer service will have to be changed if data of consumed service is changed.
+   4) Sometimes monitoring or debugging is a bit diffucult.
+   5) Trasaction management. Suppose if a request in a service to change data in its db and and the db
+      of other microservice and after the db of second services gets updated the first trasaction fails
+      due to some reason. here second db is updated because 2 trasactions are there in ther first and second
+      db both.
+
+ - How much small should be micro service?
+ ans: there are methods to decompose a service.
+ 1) decompse by business capability:
+ 2) decompose bt sub domain:
+
+ 3) should we keep common database same or different for different sersvice.
+ 4) commnication through API or events
+ 5) how the microservice is going to be integrated with others. eg. API gateways
+ 6) observability
+
+
+Decompose pattern
+-----------------
+Business capability pattern: let us take the example of online order app. we have some business
+   functionalities like order management, product management, payment service, account management
+   billing.
+
+Divide by subdomain: it is also know as domain driven design. I have one domain order management. IT can
+   can have its own services. payment can have its own services. order creation and order tracking. payment
+   can have forward payment and reverse payment.
+
