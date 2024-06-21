@@ -1,0 +1,18 @@
+- This comes at the very beginning of the system design.
+- This is a desirable property of a distributed system with replicated data.
+- C: consistency, A: availability, P: partition tolerance
+
+- check d1 where there is an application which can make request to different servers persent
+  in different countries.
+
+- At a time only two can be selected i.e CA, CP, AP.
+- consistency: When a data in node A is changed then it should also reflect in node B.
+- availability: all nodes hsould respond.
+- Partition tolerance: even after the breakage between servers system should be up.
+
+
+- why all these cannot be used altogether?
+ans: suppose there is a breakage when node A asks node B to update a data so node B will not have
+     consistency but Avaialbility and Partition is there.
+
+- now a days partition tolerance is required so we cannot compromise on P.
