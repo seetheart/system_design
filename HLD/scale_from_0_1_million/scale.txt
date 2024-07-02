@@ -1,0 +1,21 @@
+1) single server in d1
+2) separating application and database layer in d2
+3) load balancer and multiple application server in d3(it adds another layer of security because applications servers are in private ips)
+4) database replicationin and cache d4 and d5(all write request will go to master and read request to slave. Slaves ands master are alwasy in sync. If master
+   fails then salve gets promoted to master)
+5) CDN(content delivery network): CND does caching but all those who does caching are CNDs. Suppose there are users all over the world snad the
+   server is in India. Indian users will be able to access with less latency but others will face more latency. In this case. We could use cdns. Theese
+   are basically for static content like html, images, videos in d6
+
+6) multiple datacenters in d7. Suppose if the datacenter of india fails so we have need to have the whole application server, database and its replicas with read
+   and write dbs will be replicated in USA and other countries as well. All the database in the datacenters will have replicas so that the indian user can access its
+   data in usa datacenter if the indian datacenter fails.
+
+7) Messaging queue(rabbitmq and kafka): it brings async nature in application like sending emails and notifications in d8. rabbitmq has exchange, bindings and queues
+   depending on teh routing key bindiign key will decide which queue will get the exchange. In fanout the message will be sent to all the queues. Topic can send to more than
+   on queue depending on regex( sms-*) not exaclty regex
+
+8) database scaling: horizontal and vertical scaling. We have master and slave db. Horizontal scaling includes sharding. shareding are fo 2 types.
+   horizontal and vertical. horizontal sharding means differnt rows in different tables. different columns in different tables. but is has problem.
+   sharding has more sharding in itself for eg A-P names will be put in T1 adn Q-Z in T2 but if A-P has more rows. joining is not possible in horizontal
+   sharding but denormalize can be done and sharding inside sharding can be solved with consistent hashing.

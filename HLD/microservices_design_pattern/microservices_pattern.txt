@@ -82,6 +82,6 @@ Saga pattern:
   command(create, update, delete), query(select query), request , segregation
 
   -  for CUD we will use one db and for reading another db in which we have view. Now whenever the changes are made in
-     db it will trigger and eventor db trigger to upda the changes in the view db as well.
+     db it will trigger and eventor db trigger to update the changes in the view db as well.
 
 
