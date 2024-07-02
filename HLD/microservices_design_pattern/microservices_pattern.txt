@@ -19,8 +19,8 @@ ans:
    2) All the services should be loosely coupled. one microservice should not make a lot of request
       to other microservice. Latency can increase.
    3) The consumer service will have to be changed if data of consumed service is changed.
-   4) Sometimes monitoring or debugging is a bit diffucult.
-   5) Trasaction management. Suppose if a request in a service to change data in its db and and the db
+   4) Sometimes monitoring or debugging is a bit difficult.
+   5) Transaction management. Suppose if a request in a service to change data in its db and and the db
       of other microservice and after the db of second services gets updated the first trasaction fails
       due to some reason. here second db is updated because 2 trasactions are there in ther first and second
       db both.
@@ -45,4 +45,43 @@ Business capability pattern: let us take the example of online order app. we hav
 Divide by subdomain: it is also know as domain driven design. I have one domain order management. IT can
    can have its own services. payment can have its own services. order creation and order tracking. payment
    can have forward payment and reverse payment.
+
+
+Strangler pattern:
+- whenever a monolithic architecture is converted into microservices then we send around 10 percent
+  request to microservices and rest to monolithic so that if we microservices fail we can stop those
+  10 percent request and send all the request to monolithic. Once we gain the confidence we increase
+  the percent and finally all the requests to microservices.
+
+
+Saga pattern:
+- each microservice can has either shared db or its own db.
+ 1) problems with shared db:
+   - scaling of the all dbs and not the single db in which more requests are made.
+   - if a service want to delete a column or update table then we need to check all the services
+     consuming that db whether it is required by those services or not.
+ 2) pros of shared db:
+   - joins are easy.
+   - transactions can be applied easily(ACID properties)
+
+ 3) problems with different dbs:
+   - local transactions can be done but accross services is not easy. This is solved by saga pattern.
+   - query join is difficult. This is solved by CQRS.
+
+ 4) pros of different dbs:
+   - differnt kind of dbs can be use for one mysql, mongodb
+   - scaling of one particular db which has more request.
+
+- What is saga pattern?
+  sequence of local transaction. when some change is made in one service then even is sent to another service.
+  in case if event fails then compensation event is sent to previous microservice to revert the changes.
+
+- there are two types 1)choreography(normal queues) 2) orchestration(an orchestrator which will release events)
+
+- What is CQRS?
+  command(create, update, delete), query(select query), request , segregation
+
+  -  for CUD we will use one db and for reading another db in which we have view. Now whenever the changes are made in
+     db it will trigger and eventor db trigger to upda the changes in the view db as well.
+
 
