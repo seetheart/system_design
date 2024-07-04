@@ -1,0 +1,20 @@
+- hashing has a function which converts an arbitraty length value to a fixed length value
+  eg mod hashing where one 0-5 values are present to store in a table in d1.
+
+- Why mode hashing cannot be used in load balancer or horizontal sharding?
+ans: because if a new node is added in both then the number of mode value will change which will result in the
+     change of the hash.  so for eg. if a data which a converted with mod hash with 3 will go to node 1 but if
+     a node is added then mod will become 4 or if reduced will become 3 which will result the chagne in the
+     hash so all the data of previous node needs to be moved to the new node.
+
+- Consistent hashing comes to solve this problem. to reduce the rebalancing to 1/n% of total number of nodes.
+  rebalancing is the moving of the data to another node if a new node of added or previous node deleted.
+
+- Consistent hashing is creating a virtual ring and distributing all the servers equally distant now if the new server
+  is added the only few request are going to change. d2
+
+- disadvantabe of consistent hashing
+  if all the nodes are adjavcent then all the keys will go to the same. d3
+
+- Solution for above problem
+  make the virtual servers at more places in d4
