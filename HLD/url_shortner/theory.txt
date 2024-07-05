@@ -1,0 +1,27 @@
+URL Shortner
+------------
+
+
+1st phase is requirement analysis
+
+- how short url should be - interviewer will say as short as possible
+- traffic: 10million urls/day
+- which are characters are allowed: 0-9, a-z, A-Z
+
+
+How to generate hash value?
+- hash function and Base62 encoding
+
+- hash function
+  - md5 and sha-1
+    - md5 is 128 bit = 16 bytes
+    - in hexadecimal base is 16 and can be represented in 4 bits becuase hexadeciamla is 0-f i.e 16 digits and
+      16 can be represented in 4 bits.
+    - 16 bytes means 32 hexadecimal
+    - md5 will generate a character lenght of 32 but we require only 7
+    - and sha-1 returns 160 bit which convertrs to 40 charterlength
+    - now if we use hash function like md5 and sha1 we need to trim till 7 characters but this will increase the
+      chance of collision.
+
+- Base62(0-9a-zA-Z)(10+26+26 = 62)
+  -
