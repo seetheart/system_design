@@ -1,0 +1,46 @@
+Back of the envelope Estimation
+
+- It drives our decision for various things like hom much should be of the cache, where to use CDn
+cheatsheet
+           Traffic      Storage
+three 0    thousand      kb
+6 0's      million       mb
+9 0's      billion       gb
+12 0's     Trillion      tb
+15 0's     quadirillion  pb
+
+char - 2 bytes
+long/ double - 8 bytes
+avg .Image size - 300Kb
+
+x million users * y mb = x*y tb(million has 6 zeros and mb has 6 zeros = 12 0's represent tb)
+
+- generally we have to calculate num. of servers, RAM, storage capacity using estimation and Trade off
+
+
+Traffic Estimation of facebok
+- total users - 20 billion 
+- Daily active users - 250 million (25%)
+- let us suppose users has 5R(read) + 3W(write) operations in a day 
+- 250 million * 7 / 86000(~100000) = 18000 request per second
+- DAU post 2 post each post 250 charactes
+- 10% od DAU upload 1 image(300kb)
+- for 1post = 250 * 2 = 500 bytes
+- 250 million users * 1kb = 250 gb per day is required
+- 25milion also posting image * 300kb = 7500 gb ~ 8 TB
+- in 5 years  post = 2000(days in 5 years) * 250gb = 500Tb and image = 2000* 8 TB = 16PB
+
+
+Ram Estimation
+- for each user last 5 post in cache 5 * 500 bytes = 2500 bytes
+- 250 million * 2500 ~ 750gb
+- if one machine can store 75 gb ram then 10 michines required
+
+Latency
+- 95% of time 500 ms
+- 18000 request per second
+- 1 server can have 50 threads
+- 1 server can server 100 request/ sec considering 1 request takes 500 ms
+- 180 servers will be required to handle this much data
+
+
