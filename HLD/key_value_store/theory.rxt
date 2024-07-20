@@ -1,0 +1,45 @@
+Desgin Key Value Database
+
+- Where do we use it?
+ - Add to cart in amazon dynamo db
+
+Goals
+- scalability
+- de centralization
+- eventual consistency
+
+Steps
+- partition
+- replication
+- get and put operations
+- data versioning
+- gossip protocol
+- merkle tree
+
+
+- partitioning can be done using conssitent hashing
+- decentralization - if any server goes down then what. n = 3 we usually keep of the same
+   data in 3 servers. preference list is one which sotre the datacenter which contain replicas
+- when put operation comes it writes into the specific server using consitent hashing and then
+  goes to preference list and send the puts request to replica servers asynchronously
+
+-  when a request comes we have a load balancer in between. Loan balancers are of 2 types first is 
+   generic and second is partition aware. first one can send request to any server not following 
+   consistent hashing.
+- when a get request is there then cordinator sends the request to every replica and wait for defined
+  number of response to receive the value of key. This is becuase to check if key has same value in 
+  multiple servers.
+
+- If due to some server failure every replica has different version of data. We use vector clock.
+  Vector clock is list of server and counter of each object or key. And always last write win.
+
+
+- In the ring(virtual ring used for consistent hashing)every server knows about each servers range. How do they
+  know the range?
+  Every server sends a heartbeat to other servers and when more than two servers don't receive the heartbeat
+  of a particular server then that particular server is considered to be down.
+
+- Waht is merkle tree. To identity if the key value pair is correct. see in d1. It is similar to binary tree 
+  if the hash of parent does not mathc it goes to left or right where the value does not match from replicas.
+ 
+
